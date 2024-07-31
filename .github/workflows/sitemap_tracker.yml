@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -21,14 +23,13 @@ jobs:
     - name: Run sitemap tracker
       run: python sitemap_tracker.py
     - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/sitemap_stats.csv
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update sitemap stats" && git push)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
-        git add data/sitemap_stats.csv
-        git commit -m "Update sitemap stats" || exit 0
-        git push
 
 env:
   ACTIONS_RUNNER_DEBUG: true
