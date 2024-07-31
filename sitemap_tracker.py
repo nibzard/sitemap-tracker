@@ -10,7 +10,7 @@ SITEMAPS = {
     "definitions": "https://www.daytona.io/sitemap-definitions.xml",
     "dotfiles": "https://www.daytona.io/sitemap-dotfiles.xml"
 }
-CSV_FILE = "sitemap_stats.csv"  # Update this with the full path
+CSV_FILE = "data/sitemap_stats.csv"  # Update this with the full path
 
 def fetch_sitemap(url):
     response = requests.get(url)
