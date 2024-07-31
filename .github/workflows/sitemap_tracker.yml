@@ -26,7 +26,7 @@ jobs:
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add sitemap_stats.csv
+        git add data/sitemap_stats.csv
         git commit -m "Update sitemap stats" || exit 0
         git push
 
