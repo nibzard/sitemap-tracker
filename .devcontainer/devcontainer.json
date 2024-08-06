@@ -29,7 +29,9 @@
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "ms-python.isort",
-                "njpwerner.autodocstring"
+                "njpwerner.autodocstring",
+                "mechatroner.rainbow-csv",
+                "github.vscode-github-actions"
             ]
         }
     },

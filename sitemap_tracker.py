@@ -50,31 +50,11 @@ def update_csv(sitemap_name, date, total_count, new_count, urls):
     url_hash = hashlib.md5(','.join(sorted(urls)).encode()).hexdigest()
     file_exists = os.path.exists(CSV_FILE)
 
-    if file_exists:
-        with open(CSV_FILE, 'r') as f:
-            reader = csv.reader(f)
-            rows = list(reader)
-
-        # Check if there's already an entry for this sitemap and date
-        for i, row in enumerate(rows):
-            if row[0] == sitemap_name and row[1] == date.strftime("%Y-%m-%d"):
-                # Update existing entry
-                rows[i] = [sitemap_name, date.strftime("%Y-%m-%d"), total_count, new_count, url_hash]
-                break
-        else:
-            # If no existing entry found, append new row
-            rows.append([sitemap_name, date.strftime("%Y-%m-%d"), total_count, new_count, url_hash])
-
-        # Write updated data back to CSV
-        with open(CSV_FILE, 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerows(rows)
-    else:
-        # If file doesn't exist, create it with header and first entry
-        with open(CSV_FILE, 'w', newline='') as f:
-            writer = csv.writer(f)
+    with open(CSV_FILE, 'a', newline='') as f:
+        writer = csv.writer(f)
+        if not file_exists:
             writer.writerow(["Sitemap", "Date", "Total URLs", "New URLs", "URL Hash"])
-            writer.writerow([sitemap_name, date.strftime("%Y-%m-%d"), total_count, new_count, url_hash])
+        writer.writerow([sitemap_name, date.strftime("%Y-%m-%d"), total_count, new_count, url_hash])
 
 def process_sitemap(sitemap_name, url):
     print(f"Processing {sitemap_name} sitemap at {datetime.now()}")
