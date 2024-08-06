@@ -10,7 +10,13 @@ SITEMAPS = {
     "definitions": "https://www.daytona.io/sitemap-definitions.xml",
     "dotfiles": "https://www.daytona.io/sitemap-dotfiles.xml"
 }
-CSV_FILE = "data/sitemap_stats.csv"
+DATA_FOLDER = "data"
+CSV_FILE = os.path.join(DATA_FOLDER, "sitemap_stats.csv")
+
+def ensure_data_folder_exists():
+    if not os.path.exists(DATA_FOLDER):
+        os.makedirs(DATA_FOLDER)
+        print(f"Created data folder: {DATA_FOLDER}")
 
 def fetch_sitemap(url):
     response = requests.get(url)
@@ -66,6 +72,7 @@ def process_sitemap(sitemap_name, url):
     print(f"{sitemap_name} sitemap - Total URLs: {total_count}, New URLs since last run: {new_count}")
 
 def main():
+    ensure_data_folder_exists()
     for sitemap_name, url in SITEMAPS.items():
         process_sitemap(sitemap_name, url)
 
