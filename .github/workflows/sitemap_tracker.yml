@@ -30,6 +30,3 @@ jobs:
         git diff --quiet && git diff --staged --quiet || (git commit -m "Update sitemap stats" && git push)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-env:
-  ACTIONS_RUNNER_DEBUG: true
