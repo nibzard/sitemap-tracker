@@ -8,7 +8,8 @@ import os
 
 SITEMAPS = {
     "definitions": "https://www.daytona.io/sitemap-definitions.xml",
-    "dotfiles": "https://www.daytona.io/sitemap-dotfiles.xml"
+    "dotfiles": "https://www.daytona.io/sitemap-dotfiles.xml",
+    "changelog": "https://www.daytona.io/sitemap-changelog.xml"
 }
 DATA_FOLDER = "data"
 CSV_FILE = os.path.join(DATA_FOLDER, "sitemap_stats.csv")
